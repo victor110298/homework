@@ -8,9 +8,4 @@ public interface Stack<E> {
     void clear();
 
     int size();
-
-    E peek();
-
-    E pop();
 }
-

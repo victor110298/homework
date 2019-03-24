@@ -1,9 +1,11 @@
 package lists;
 
-class MyLinkedList<S> implements MyList {
+class MyLinkedList<T> implements MyList<T> {
 
     private static int counter;
     private Node head;
+    private Node<T> first;
+    private Node<T> last;
 
     @Override
     public void add(Object data) {
@@ -47,7 +49,7 @@ class MyLinkedList<S> implements MyList {
     }
 
     @Override
-    public Object get(int index) {
+    public T get(int index) {
         if (index < 0)
             return null;
         Node current = null;
@@ -64,10 +66,9 @@ class MyLinkedList<S> implements MyList {
                 current = current.getNext();
 
             }
-            return current.getData();
+            return (T) current.getData();
         }
-        return current;
-
+        return (T) current;
     }
 
     @Override
@@ -77,7 +78,7 @@ class MyLinkedList<S> implements MyList {
             for (int i = 0; i < index; i++) {
                 if (current.getNext() == null) {
                     return false;
-                } else if (current.getPrevious() == null) {
+                }  if (current.getPrevious() == null) {
                     return false;
                 }
 
@@ -94,23 +95,18 @@ class MyLinkedList<S> implements MyList {
     }
 
     @Override
-    public boolean clear() {
-        Node current = head;
-        if (head != null) {
-            for (int i = 0; i < counter; i++) {
-                if (current.getNext() == null) {
-                    return false;
-                }
-                if (current.getPrevious() == null) {
-                    return false;
-                }
-                current.setNext(current.getNext().getNext());
-                current.setPrevious(current.getPrevious().getPrevious());
-            }
-            return true;
-        }
-        return false;
+    public void clear() {
+        Node<T> node = first;
+        do {
+            Node<T> next = node.next;
+            node.item = null;
+            node.next = null;
+            node.previous = null;
+            node = next;
+        } while (node != null);
 
+        first = last = null;
+        counter = 0;
     }
 
     @Override
@@ -132,7 +128,8 @@ class MyLinkedList<S> implements MyList {
         return output;
     }
 
-    private class Node {
+    private class Node<T> {
+        T item;
         Node next;
         Node previous;
         Object data;

@@ -39,24 +39,6 @@ public class MyStack<E> implements Stack<E> {
         return size;
     }
 
-    @Override
-    public E peek() {
-        if (isEmpty()) {
-            System.out.println("Stack is empty");
-            return null;
-        }
-        return (E) array[size - 1];
-    }
-
-    @Override
-    public E pop() {
-        if (isEmpty()) {
-            System.out.println("Stack is empty");
-            return null;
-        }
-        return (E) array[--size];
-    }
-
     private void resizeArray(int newLength) {
         Object[] newArray = new Object[newLength];
         System.arraycopy(array, 0, newArray, 0, size);

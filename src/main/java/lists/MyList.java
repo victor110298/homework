@@ -5,8 +5,5 @@ public interface MyList<T> {
     void add(Object t);
     Object remove(int index);
     int size();
-    boolean clear();
+    void clear();
 }
-
-
-

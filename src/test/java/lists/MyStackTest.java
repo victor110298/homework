@@ -17,15 +17,6 @@ public class MyStackTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void peek() {
-        stack.push("Test string");
-        int actual = 1;
-        int expected = stack.size();
-        assertEquals(expected, actual);
-
-    }
-
-    @Test(expected = NullPointerException.class)
     public void remove() {
         int actual = stack.size();
         stack.push("Test string 1");
@@ -48,15 +39,7 @@ public class MyStackTest {
         int beforeSize = stack.size();
         stack.push("Test string");
         int afterSize = stack.size();
-        assertTrue(beforeSize!=afterSize);
+        assertTrue(beforeSize != afterSize);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void pop() {
-        int actual = stack.size();
-        stack.push("Test string");
-        stack.pop();
-        int expected = stack.size();
-        assertEquals(expected, actual);
-    }
 }

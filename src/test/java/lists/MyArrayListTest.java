@@ -2,10 +2,10 @@ package lists;
 
 import org.junit.Test;
 
-import static org.testng.Assert.assertTrue;
 import static org.testng.AssertJUnit.assertEquals;
 
 public class MyArrayListTest {
+    private static final String CONSTANT = "Test string";
 
     @Test
     public void add() {
@@ -19,21 +19,19 @@ public class MyArrayListTest {
     @Test
     public void get() {
         MyArrayList<String> list = new MyArrayList<>();
-        list.add("Test string");
+        list.add(CONSTANT);
         list.get(0);
         String actual = list.get(0);
         String expected = "Test string";
         assertEquals(expected, actual);
-
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void remove() {
         MyArrayList<String> list = new MyArrayList<>();
-        int actual = list.size();
-        list.add("Test string 1");
+        int expected = 2;
         list.remove(2);
-        int expected = list.size();
+        int actual = Integer.parseInt(list.get(3));
         assertEquals(expected, actual);
     }
 
@@ -41,15 +39,16 @@ public class MyArrayListTest {
     public void clear() {
         MyArrayList<String> list = new MyArrayList<>();
         list.add("Test string 1");
+        int beforeSize = list.size();
         list.clear();
-        assertTrue(true);
+        int afterSize = list.size();
+        assertEquals(beforeSize, afterSize);
     }
 
     @Test
     public void size() {
         MyArrayList<String> list = new MyArrayList<>();
         list.add("Test string");
-        list.size();
         assertEquals(1, list.size());
     }
 }

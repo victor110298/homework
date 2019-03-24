@@ -6,28 +6,26 @@ import static org.testng.Assert.assertTrue;
 import static org.testng.AssertJUnit.assertEquals;
 
 public class MyLinkedListTest {
-private MyLinkedList<String> list=new MyLinkedList<>();
+    private MyLinkedList<String> list = new MyLinkedList<>();
+
     @Test
     public void add() {
         list.add("Test string");
-        String actual = (String) list.get(0);
-        String expected = "Test string";
-        assertEquals(expected, actual);
+        int sizeBefore = list.size();
+        list.add("Test string 2");
+        int sizeAfter = list.size();
+        assertTrue(sizeBefore != sizeAfter);
     }
 
     @Test
     public void get() {
-        list.add("Test string");
-        list.get(0);
-        String actual = (String) list.get(0);
-        String expected = "Test string";
+        String expected = list.get(0);
+        String actual = list.get(0);
         assertEquals(expected, actual);
-
     }
 
     @Test
     public void remove() {
-        int actual =list.size();
         list.add("Test string 1");
         list.add("Test string 2");
         list.add("Test string 3");
@@ -36,16 +34,19 @@ private MyLinkedList<String> list=new MyLinkedList<>();
         assertEquals(expected, 2);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void clear() {
-        list.add("Test string 1");
+        int expected = 0;
         list.clear();
-        assertTrue(true);    }
+        int actual = list.size();
+        assertEquals(expected, actual);
+    }
 
     @Test
     public void size() {
+        int sizeBefor = list.size();
         list.add("Test string");
-        list.size();
-        assertTrue(true);
+        int sizeAfter = list.size();
+        assertTrue(sizeBefor != sizeAfter);
     }
 }

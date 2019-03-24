@@ -47,14 +47,13 @@ public class MyArrayList<T> implements MyList<T> {
     }
 
     @Override
-    public boolean clear() {
+    public void clear() {
       if (actSize==0) {
           for (int i = 0; i < actSize; i++) {
               myStore[i] = null;
           }
           actSize = 0;
       }
-        return true;
     }
 
     public int size() {
