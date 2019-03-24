@@ -1,10 +1,11 @@
 package lists;
 
-class MyLinkedList implements MyList {
+class MyLinkedList<S> implements MyList {
 
     private static int counter;
     private Node head;
 
+    @Override
     public void add(Object data) {
         if (head == null) {
             head = new Node(data);
@@ -45,6 +46,7 @@ class MyLinkedList implements MyList {
         counter++;
     }
 
+    @Override
     public Object get(int index) {
         if (index < 0)
             return null;
@@ -68,14 +70,14 @@ class MyLinkedList implements MyList {
 
     }
 
+    @Override
     public Object remove(int index) {
         Node current = head;
         if (head != null) {
             for (int i = 0; i < index; i++) {
                 if (current.getNext() == null) {
                     return false;
-                }
-                else if (current.getPrevious() == null) {
+                } else if (current.getPrevious() == null) {
                     return false;
                 }
 
@@ -91,14 +93,17 @@ class MyLinkedList implements MyList {
         return false;
     }
 
+    @Override
     public boolean clear() {
         Node current = head;
         if (head != null) {
             for (int i = 0; i < counter; i++) {
-                if (current.getNext() == null){
-                    return false;}
-                if (current.getPrevious() == null){
-                    return false;}
+                if (current.getNext() == null) {
+                    return false;
+                }
+                if (current.getPrevious() == null) {
+                    return false;
+                }
                 current.setNext(current.getNext().getNext());
                 current.setPrevious(current.getPrevious().getPrevious());
             }
@@ -108,6 +113,7 @@ class MyLinkedList implements MyList {
 
     }
 
+    @Override
     public int size() {
         return counter;
     }
@@ -161,24 +167,6 @@ class MyLinkedList implements MyList {
             next = nextValue;
         }
     }
-
-    public static void main(String[] args) {
-        MyLinkedList myLinkedList = new MyLinkedList();
-        myLinkedList.add("1");
-        myLinkedList.add("2");
-        myLinkedList.add("3");
-        myLinkedList.add("4");
-        myLinkedList.add("5");
-
-        System.out.println("Print: myLinkedList:" + myLinkedList);
-        System.out.println(".size(): " + myLinkedList.size());
-        System.out.println(".get(3): " + myLinkedList.get(3) + " (get element at index:3 - list starts from 0)");
-        System.out.println(".remove(2): " + myLinkedList.remove(2) + " (element removed)");
-        System.out.println(myLinkedList);
-        System.out.println("Remove all");
-        myLinkedList.clear();
-        myLinkedList.add("6");
-        System.out.println(myLinkedList);
-    }
 }
+
 

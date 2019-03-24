@@ -2,12 +2,13 @@ package lists;
 
 import static com.sun.xml.internal.fastinfoset.util.ValueArray.DEFAULT_CAPACITY;
 
-public class MyStack<E> {
+public class MyStack<E> implements Stack<E> {
     private Object[] array;
     private int size = 0;
     private static final int DEFAUlT_CAPACITY = 10;
     private static final int CUT_RATE = 10;
 
+    @Override
     public void push(E item) {
         if (size == array.length - 1) {
             resizeArray(array.length * 2);
@@ -15,6 +16,7 @@ public class MyStack<E> {
         array[size++] = item;
     }
 
+    @Override
     public void remove() {
         if (!isEmpty()) {
             array[size--] = null;
@@ -24,6 +26,7 @@ public class MyStack<E> {
         }
     }
 
+    @Override
     public void clear() {
         for (int i = 0; i < size; i++) {
             array[i] = null;
@@ -31,10 +34,12 @@ public class MyStack<E> {
         size = 0;
     }
 
+    @Override
     public int size() {
         return size;
     }
 
+    @Override
     public E peek() {
         if (isEmpty()) {
             System.out.println("Stack is empty");
@@ -43,6 +48,7 @@ public class MyStack<E> {
         return (E) array[size - 1];
     }
 
+    @Override
     public E pop() {
         if (isEmpty()) {
             System.out.println("Stack is empty");
@@ -60,26 +66,6 @@ public class MyStack<E> {
     public boolean isEmpty() {
         return (size == 0);
     }
-
-    public static void main(String[] args) {
-        MyStack<String> stack = new MyStack<>();
-        stack.push("first");
-        stack.push("second");
-        stack.push("third");
-        stack.push("fourth");
-
-        System.out.println(stack.size());
-
-        System.out.println(stack.peek());
-        System.out.println(stack.size());
-
-        stack.remove();
-        System.out.println(stack.size());
-
-        System.out.println(stack.pop());
-        System.out.println(stack.size());
-        stack.clear();
-        System.out.println(stack.size());
-    }
 }
+
 
