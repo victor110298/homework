@@ -1,10 +1,13 @@
 package lists;
 
-class MyLinkedList implements MyList {
+class MyLinkedList<T> implements MyList<T> {
 
     private static int counter;
     private Node head;
+    private Node<T> first;
+    private Node<T> last;
 
+    @Override
     public void add(Object data) {
         if (head == null) {
             head = new Node(data);
@@ -45,7 +48,8 @@ class MyLinkedList implements MyList {
         counter++;
     }
 
-    public Object get(int index) {
+    @Override
+    public T get(int index) {
         if (index < 0)
             return null;
         Node current = null;
@@ -62,20 +66,19 @@ class MyLinkedList implements MyList {
                 current = current.getNext();
 
             }
-            return current.getData();
+            return (T) current.getData();
         }
-        return current;
-
+        return (T) current;
     }
 
+    @Override
     public Object remove(int index) {
         Node current = head;
         if (head != null) {
             for (int i = 0; i < index; i++) {
                 if (current.getNext() == null) {
                     return false;
-                }
-                else if (current.getPrevious() == null) {
+                }  if (current.getPrevious() == null) {
                     return false;
                 }
 
@@ -91,23 +94,22 @@ class MyLinkedList implements MyList {
         return false;
     }
 
-    public boolean clear() {
-        Node current = head;
-        if (head != null) {
-            for (int i = 0; i < counter; i++) {
-                if (current.getNext() == null){
-                    return false;}
-                if (current.getPrevious() == null){
-                    return false;}
-                current.setNext(current.getNext().getNext());
-                current.setPrevious(current.getPrevious().getPrevious());
-            }
-            return true;
-        }
-        return false;
+    @Override
+    public void clear() {
+        Node<T> node = first;
+        do {
+            Node<T> next = node.next;
+            node.item = null;
+            node.next = null;
+            node.previous = null;
+            node = next;
+        } while (node != null);
 
+        first = last = null;
+        counter = 0;
     }
 
+    @Override
     public int size() {
         return counter;
     }
@@ -126,7 +128,8 @@ class MyLinkedList implements MyList {
         return output;
     }
 
-    private class Node {
+    private class Node<T> {
+        T item;
         Node next;
         Node previous;
         Object data;
@@ -161,24 +164,6 @@ class MyLinkedList implements MyList {
             next = nextValue;
         }
     }
-
-    public static void main(String[] args) {
-        MyLinkedList myLinkedList = new MyLinkedList();
-        myLinkedList.add("1");
-        myLinkedList.add("2");
-        myLinkedList.add("3");
-        myLinkedList.add("4");
-        myLinkedList.add("5");
-
-        System.out.println("Print: myLinkedList:" + myLinkedList);
-        System.out.println(".size(): " + myLinkedList.size());
-        System.out.println(".get(3): " + myLinkedList.get(3) + " (get element at index:3 - list starts from 0)");
-        System.out.println(".remove(2): " + myLinkedList.remove(2) + " (element removed)");
-        System.out.println(myLinkedList);
-        System.out.println("Remove all");
-        myLinkedList.clear();
-        myLinkedList.add("6");
-        System.out.println(myLinkedList);
-    }
 }
+
 

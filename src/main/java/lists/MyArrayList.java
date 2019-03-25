@@ -11,6 +11,7 @@ public class MyArrayList<T> implements MyList<T> {
         myStore = new Object[DEFAUlT_CAPACITY];
     }
 
+    @Override
     public T get(int index) {
         if (index > 0 || index < actSize) {
             return (T) myStore[index];
@@ -19,6 +20,7 @@ public class MyArrayList<T> implements MyList<T> {
         }
     }
 
+    @Override
     public void add(Object obj) {
         if (myStore.length - actSize <= 5) {
             increaseListSize();
@@ -26,9 +28,10 @@ public class MyArrayList<T> implements MyList<T> {
         myStore[actSize++] = obj;
     }
 
+    @Override
     public T remove(int index) {
-        if (index<0 || index < actSize) {
-            T t= (T) myStore[index];
+        if (index < 0 || index < actSize) {
+            T t = (T) myStore[index];
             myStore[index] = null;
             int tmp = index;
             while (tmp < actSize) {
@@ -43,11 +46,14 @@ public class MyArrayList<T> implements MyList<T> {
         }
     }
 
+    @Override
     public void clear() {
-        for (int i = 0; i < actSize; i++) {
-            myStore[i] = null;
-        }
-        actSize = 0;
+      if (actSize==0) {
+          for (int i = 0; i < actSize; i++) {
+              myStore[i] = null;
+          }
+          actSize = 0;
+      }
     }
 
     public int size() {
@@ -57,29 +63,8 @@ public class MyArrayList<T> implements MyList<T> {
     private void increaseListSize() {
         myStore = Arrays.copyOf(myStore, myStore.length * 2);
     }
+}
 
-//    public static void main(String a[]) {
-//        MyArrayList mal = new MyArrayList();
-//        mal.add(new Integer(2));
-//        mal.add(new Integer(5));
-//        mal.add(new Integer(1));
-//        mal.add(new Integer(23));
-//        mal.add(new Integer(14));
-//        for (int i = 0; i < mal.size(); i++) {
-//            System.out.print(mal.get(i) + " ");
-//        }
-//        System.out.println("\nMy Array after clear");
-//        mal.clear();
-//        mal.add(new Integer(29));
-//        mal.add(new Integer(43));
-//        mal.add(new Integer(52));
-//        System.out.println("Element at Index 1: " + mal.get(1));
-//        System.out.println("MyList size: " + mal.size());
-//        System.out.println("Removing element at index 2: " + mal.remove(1));
-//        for (int i = 0; i < mal.size(); i++) {
-//            System.out.print(mal.get(i) + " ");
-//        }
-    }
 
 
 
