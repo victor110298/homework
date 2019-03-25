@@ -6,10 +6,10 @@ import static org.testng.Assert.assertTrue;
 import static org.testng.AssertJUnit.assertEquals;
 
 public class MyLinkedListTest {
-    private MyLinkedList<String> list = new MyLinkedList<>();
 
     @Test
     public void add() {
+        MyLinkedList<String> list = new MyLinkedList<>();
         list.add("Test string");
         int sizeBefore = list.size();
         list.add("Test string 2");
@@ -19,6 +19,7 @@ public class MyLinkedListTest {
 
     @Test
     public void get() {
+        MyLinkedList<String> list = new MyLinkedList<>();
         String expected = list.get(0);
         String actual = list.get(0);
         assertEquals(expected, actual);
@@ -26,6 +27,7 @@ public class MyLinkedListTest {
 
     @Test
     public void remove() {
+        MyLinkedList<String> list = new MyLinkedList<>();
         list.add("Test string 1");
         list.add("Test string 2");
         list.add("Test string 3");
@@ -36,6 +38,7 @@ public class MyLinkedListTest {
 
     @Test(expected = NullPointerException.class)
     public void clear() {
+        MyLinkedList<String> list = new MyLinkedList<>();
         int expected = 0;
         list.clear();
         int actual = list.size();
@@ -44,6 +47,7 @@ public class MyLinkedListTest {
 
     @Test
     public void size() {
+        MyLinkedList<String> list = new MyLinkedList<>();
         int sizeBefor = list.size();
         list.add("Test string");
         int sizeAfter = list.size();

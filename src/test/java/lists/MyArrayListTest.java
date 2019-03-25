@@ -29,10 +29,8 @@ public class MyArrayListTest {
     @Test(expected = IndexOutOfBoundsException.class)
     public void remove() {
         MyArrayList<String> list = new MyArrayList<>();
-        int expected = 2;
         list.remove(2);
-        int actual = Integer.parseInt(list.get(3));
-        assertEquals(expected, actual);
+        list.get(3);
     }
 
     @Test

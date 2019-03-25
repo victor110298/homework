@@ -1,15 +1,21 @@
 package lists;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.testng.Assert.assertTrue;
 import static org.testng.AssertJUnit.assertEquals;
 
 public class MyStackTest {
-    private MyStack<String> stack = new MyStack<>();
+private MyStack<String> stack;
+
+    @Before
+    public void init(){
+        stack=new MyStack<>();
+    }
 
     @Test(expected = NullPointerException.class)
-    public void push() throws Exception {
+    public void push() {
         int expected = stack.size();
         stack.push("Test string");
         int actual = stack.size();
@@ -18,7 +24,6 @@ public class MyStackTest {
 
     @Test(expected = NullPointerException.class)
     public void remove() {
-        int actual = stack.size();
         stack.push("Test string 1");
         stack.push("Test string 2");
         stack.push("Test string 3");
@@ -41,5 +46,4 @@ public class MyStackTest {
         int afterSize = stack.size();
         assertTrue(beforeSize != afterSize);
     }
-
 }
